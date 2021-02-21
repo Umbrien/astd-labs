@@ -1,4 +1,4 @@
-package com.company;
+package com.company.lab_1;
 
 
 class SortedLinkedList {
