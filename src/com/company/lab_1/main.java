@@ -37,6 +37,17 @@ class SortedLinkedList {
         }
     }
 
+    public static SortedLinkedList fromArray(int[] arr) {
+        SortedLinkedList list = new SortedLinkedList();
+
+        for (int i : arr) {
+            list.insert(i);
+        }
+
+        return list;
+    }
+
+
     public static void printList(SortedLinkedList list) {
         Node currentNode = list.head;
 
@@ -54,24 +65,11 @@ class Main {
 
     public static void main(String[] args) {
 
-        SortedLinkedList sortedLinkedList = new SortedLinkedList();
-        sortedLinkedList.insert(4);
-        sortedLinkedList.insert(3);
-        sortedLinkedList.insert(2);
-        sortedLinkedList.insert(6);
-        sortedLinkedList.insert(5);
-        sortedLinkedList.insert(5);
-        sortedLinkedList.insert(6);
-        sortedLinkedList.insert(1);
-        sortedLinkedList.insert(2);
-        SortedLinkedList.printList(sortedLinkedList);
+        SortedLinkedList list = SortedLinkedList.fromArray(new int[] {1, 6, 3, 1, 2, 5});
+        SortedLinkedList.printList(list);
 
-        SortedLinkedList l1 = new SortedLinkedList();
-        l1.insert(1);
-        l1.insert(2);
-        SortedLinkedList l2 = new SortedLinkedList();
-        l2.insert(3);
-        l2.insert(4);
+        SortedLinkedList l1 = SortedLinkedList.fromArray(new int[] {1, 2});
+        SortedLinkedList l2 = SortedLinkedList.fromArray(new int[] {3, 4});
         l1.mergeList(l2);
         SortedLinkedList.printList(l1);
     }
