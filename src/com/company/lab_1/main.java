@@ -28,6 +28,15 @@ class SortedLinkedList {
         }
     }
 
+    public void mergeList(SortedLinkedList list) {
+        Node current = list.head;
+
+        while (current != null) {
+            this.insert(current.data);
+            current = current.next;
+        }
+    }
+
     public static void printList(SortedLinkedList list) {
         Node currentNode = list.head;
 
@@ -56,5 +65,14 @@ class Main {
         sortedLinkedList.insert(1);
         sortedLinkedList.insert(2);
         SortedLinkedList.printList(sortedLinkedList);
+
+        SortedLinkedList l1 = new SortedLinkedList();
+        l1.insert(1);
+        l1.insert(2);
+        SortedLinkedList l2 = new SortedLinkedList();
+        l2.insert(3);
+        l2.insert(4);
+        l1.mergeList(l2);
+        SortedLinkedList.printList(l1);
     }
 }
