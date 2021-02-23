@@ -77,6 +77,15 @@ class SortedLinkedList<T extends Comparable<T>> implements Iterable<T>{
         return list;
     }
 
+    int indexOf(T item) {
+        int index = 0;
+        for(T el: this) {
+            if (item == el)
+                return index;
+            index++;
+        }
+        return -1;
+    }
 
     public void printList() {
 
