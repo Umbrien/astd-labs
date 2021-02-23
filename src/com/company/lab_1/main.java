@@ -11,6 +11,10 @@ class SortedLinkedList<T extends Comparable<T>> {
         Node(T d) { data = d; }
     }
 
+    public boolean isEmpty() {
+        return this.head == null;
+    }
+
     public void insert(T data) {
         Node new_node = new Node(data);
 
