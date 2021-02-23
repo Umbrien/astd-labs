@@ -1,8 +1,36 @@
 package com.company.lab_1;
 
+import java.util.Iterator;
 
-class SortedLinkedList<T extends Comparable<T>> {
+
+class SortedLinkedListIterator<T extends Comparable<T>> implements Iterator<T> {
+
+    private SortedLinkedList<T>.Node currentNode;
+
+    public SortedLinkedListIterator(SortedLinkedList<T> sortedLinkedList) {
+        this.currentNode = sortedLinkedList.head;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return currentNode != null;
+    }
+
+    @Override
+    public T next() {
+        T dataToReturn = currentNode.data;
+        currentNode = currentNode.next;
+        return dataToReturn;
+    }
+}
+
+class SortedLinkedList<T extends Comparable<T>> implements Iterable<T>{
     Node head;
+
+    @Override
+    public Iterator<T> iterator() {
+        return new SortedLinkedListIterator<T>(this);
+    }
 
     class Node {
         T data;
@@ -33,11 +61,8 @@ class SortedLinkedList<T extends Comparable<T>> {
     }
 
     public void mergeList(SortedLinkedList<T> list) {
-        Node current = list.head;
-
-        while (current != null) {
-            this.addItem(current.data);
-            current = current.next;
+        for(T el: list) {
+            this.addItem(el);
         }
     }
 
@@ -54,13 +79,11 @@ class SortedLinkedList<T extends Comparable<T>> {
 
 
     public void printList() {
-        Node currentNode = this.head;
 
         System.out.print("SortedLinkedList: ");
 
-        while (currentNode != null) {
-            System.out.print(currentNode.data + " ");
-            currentNode = currentNode.next;
+        for(T el: this) {
+            System.out.print(el + " ");
         }
         System.out.println();
     }
