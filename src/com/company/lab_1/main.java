@@ -4,7 +4,7 @@ package com.company.lab_1;
 class SortedLinkedList {
     Node head;
 
-    static class Node {
+    class Node {
         int data;
         Node next;
 
@@ -51,7 +51,7 @@ class SortedLinkedList {
     public static void printList(SortedLinkedList list) {
         Node currentNode = list.head;
 
-        System.out.print("LinkedList: ");
+        System.out.print("SortedLinkedList: ");
 
         while (currentNode != null) {
             System.out.print(currentNode.data + " ");
