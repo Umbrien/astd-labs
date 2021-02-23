@@ -15,7 +15,7 @@ class SortedLinkedList<T extends Comparable<T>> {
         return this.head == null;
     }
 
-    public void insert(T data) {
+    public void addItem(T data) {
         Node new_node = new Node(data);
 
         if (head == null || head.data.compareTo(new_node.data) >= 0) {
@@ -36,7 +36,7 @@ class SortedLinkedList<T extends Comparable<T>> {
         Node current = list.head;
 
         while (current != null) {
-            this.insert(current.data);
+            this.addItem(current.data);
             current = current.next;
         }
     }
@@ -46,7 +46,7 @@ class SortedLinkedList<T extends Comparable<T>> {
         SortedLinkedList<S> list = new SortedLinkedList<>();
 
         for (S i : arr) {
-            list.insert(i);
+            list.addItem(i);
         }
 
         return list;
