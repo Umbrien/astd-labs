@@ -87,6 +87,13 @@ class SortedLinkedList<T extends Comparable<T>> implements Iterable<T>{
         }
         System.out.println();
     }
+
+    public int getSize() {
+        int size = 0;
+        for (T el: this)
+            size++;
+        return size;
+    }
 }
 
 class Main {
