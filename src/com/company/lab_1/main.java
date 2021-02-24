@@ -60,12 +60,30 @@ class SortedLinkedList<T extends Comparable<T>> implements Iterable<T>{
         }
     }
 
+    void deleteItem(T key) {
+        Node current = head, prev = null;
+
+        if (current != null && current.data == key) {
+            head = current.next;
+            return;
+        }
+
+        while (current != null && current.data != key) {
+            prev = current;
+            current = current.next;
+        }
+
+        if (current == null)
+            return;
+
+        prev.next = current.next;
+    }
+
     public void mergeList(SortedLinkedList<T> list) {
         for(T el: list) {
             this.addItem(el);
         }
     }
-
 
     public static <S extends Comparable<S>> SortedLinkedList<S> fromArray(S[] arr) {
         SortedLinkedList<S> list = new SortedLinkedList<>();
