@@ -60,6 +60,10 @@ class SortedLinkedList<T extends Comparable<T>> implements Iterable<T>{
         }
     }
 
+    void makeEmpty() {
+        this.head = null;
+    }
+
     void deleteItem(T key) {
         Node current = head, prev = null;
 
