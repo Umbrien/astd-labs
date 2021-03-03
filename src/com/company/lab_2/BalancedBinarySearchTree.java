@@ -15,7 +15,7 @@ public class BalancedBinarySearchTree<T extends Comparable<T>> {
 
     boolean isFull() {return !isEmpty();}
 
-    int size() {return -1;}
+    int size() { throw new UnsupportedOperationException(); }
 
     private Node recursiveAdd(Node current, T item) {
         if (current == null) {
@@ -57,7 +57,7 @@ public class BalancedBinarySearchTree<T extends Comparable<T>> {
         return recursiveSearch(root, item);
     }
 
-    int depthOf(T item) {return -1;}
+    int depthOf(T item) { throw new UnsupportedOperationException(); }
 
     private void printTree_preorder_recursive(Node node) {
         if(node == null) return;
@@ -69,11 +69,18 @@ public class BalancedBinarySearchTree<T extends Comparable<T>> {
 
     void printTree_preorder() {
         printTree_preorder_recursive(this.root);
+        System.out.print("\n");
     }
 
-    void printTree_inorder() {}
+    void printTree_inorder() {
+        throw new UnsupportedOperationException();
+    }
 
-    void printTree_postorder() {}
+    void printTree_postorder() {
+        throw new UnsupportedOperationException();
+    }
+
+    void insertBBST(BalancedBinarySearchTree<T> tree) { throw new UnsupportedOperationException(); }
 
     @SafeVarargs
     public static <S extends Comparable<S>> BalancedBinarySearchTree<S> fromArray(S... arr) {
