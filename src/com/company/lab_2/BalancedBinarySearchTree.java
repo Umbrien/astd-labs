@@ -75,6 +75,15 @@ public class BalancedBinarySearchTree<T extends Comparable<T>> {
 
     void printTree_postorder() {}
 
-    void insertBBST(BalancedBinarySearchTree<T> tree) {}
+    @SafeVarargs
+    public static <S extends Comparable<S>> BalancedBinarySearchTree<S> fromArray(S... arr) {
+        BalancedBinarySearchTree<S> tree = new BalancedBinarySearchTree<>();
+
+        for(S i: arr) {
+            tree.addItem(i);
+        }
+
+        return tree;
+    }
 
 }
