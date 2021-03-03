@@ -72,8 +72,17 @@ public class BalancedBinarySearchTree<T extends Comparable<T>> {
         System.out.print("\n");
     }
 
+    private void printTree_inorder_recursive(Node node) {
+        if(node == null) return;
+
+        printTree_inorder_recursive(node.left);
+        System.out.print(node.data + " ");
+        printTree_inorder_recursive(node.right);
+    }
+
     void printTree_inorder() {
-        throw new UnsupportedOperationException();
+        printTree_inorder_recursive(this.root);
+        System.out.print("\n");
     }
 
     void printTree_postorder() {
