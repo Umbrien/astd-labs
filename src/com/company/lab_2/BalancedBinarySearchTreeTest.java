@@ -67,6 +67,16 @@ class BalancedBinarySearchTreeTest {
     }
 
     @Test
+    void deleteItem() {
+        BalancedBinarySearchTree<Integer> tree = BalancedBinarySearchTree.fromArray(1,2,3);
+        tree.printTree_preorder();
+        assertEquals("1 2 3 \n", outContent.toString());
+        tree.deleteItem(2);
+        tree.printTree_preorder();
+        assertEquals("1 2 3 \n1 3 \n", outContent.toString());
+    }
+
+    @Test
     void search() {
         BalancedBinarySearchTree<Integer> tree = new BalancedBinarySearchTree<>();
         assertFalse(tree.search(3));

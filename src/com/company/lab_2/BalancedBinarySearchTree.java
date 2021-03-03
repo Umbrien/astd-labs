@@ -41,6 +41,52 @@ public class BalancedBinarySearchTree<T extends Comparable<T>> {
         // TODO check if balanced. If not, go balance, emo kid
     }
 
+    private T findSmallestValue(Node node) {
+        return node.left == null ? node.data : findSmallestValue(node.left);
+    }
+
+    /**
+     * Find node to delete, then delete it
+     */
+    private Node recursiveDelete(Node current, T item) {
+        if (current == null) return null;
+
+        // Node to delete found
+        if (item.compareTo(current.data) == 0) {
+            // Node is a leaf
+            if (current.left == null && current.right == null) {
+                return null;
+            }
+
+            // Node has only left child
+            if (current.left == null) {
+                return current.right;
+            }
+
+            // Node has only right child
+            if (current.right == null) {
+                return current.left;
+            }
+
+            // Node has both left and right children
+            T smallestValue = findSmallestValue(current.right);
+            current.data = smallestValue;
+            current.right = recursiveDelete(current.right, smallestValue);
+            return current;
+        }
+
+        if (item.compareTo(current.data) < 0) {
+            current.left = recursiveDelete(current.left, item);
+            return current;
+        }
+        current.right = recursiveDelete(current.right, item);
+        return current;
+    }
+
+    void deleteItem(T item) {
+        root = recursiveDelete(root, item);
+    }
+
     private boolean recursiveSearch(Node current, T item) {
         if(current == null) {
             return false;
