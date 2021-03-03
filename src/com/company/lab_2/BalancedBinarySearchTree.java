@@ -59,7 +59,17 @@ public class BalancedBinarySearchTree<T extends Comparable<T>> {
 
     int depthOf(T item) {return -1;}
 
-    void printTree_preorder() {}
+    private void printTree_preorder_recursive(Node node) {
+        if(node == null) return;
+
+        System.out.print(node.data + " ");
+        printTree_preorder_recursive(node.left);
+        printTree_preorder_recursive(node.right);
+    }
+
+    void printTree_preorder() {
+        printTree_preorder_recursive(this.root);
+    }
 
     void printTree_inorder() {}
 
