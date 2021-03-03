@@ -85,8 +85,17 @@ public class BalancedBinarySearchTree<T extends Comparable<T>> {
         System.out.print("\n");
     }
 
+    private void printTree_postorder_recursive(Node node) {
+        if(node == null) return;
+
+        printTree_postorder_recursive(node.left);
+        printTree_postorder_recursive(node.right);
+        System.out.print(node.data + " ");
+    }
+
     void printTree_postorder() {
-        throw new UnsupportedOperationException();
+        printTree_postorder_recursive(this.root);
+        System.out.print("\n");
     }
 
     void insertBBST(BalancedBinarySearchTree<T> tree) { throw new UnsupportedOperationException(); }
