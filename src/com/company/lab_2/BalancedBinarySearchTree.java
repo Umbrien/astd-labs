@@ -6,6 +6,7 @@ public class BalancedBinarySearchTree<T extends Comparable<T>> {
 
     class Node {
         T data;
+        int height;
         Node left, right;
 
         Node(T d) { data = d; }
@@ -46,7 +47,61 @@ public class BalancedBinarySearchTree<T extends Comparable<T>> {
         // Normal insert
         root = recursiveAdd(root, item);
 
-        // TODO check if balanced. If not, go balance, emo kid
+        // Balancing
+        root = rebalance(root);
+    }
+
+    private int height(Node node) {
+        return node == null ? -1 : node.height;
+    }
+
+    private void updateHeight(Node current) {
+        current.height = 1 + Math.max(height(current.left), height(current.right));
+    }
+
+    private int getBalance(Node node) {
+        return node == null ? 0 : height(node.right) - height(node.left);
+    }
+
+    private Node rotateLeft(Node y) {
+        Node x = y.right;
+        Node z = x.left;
+        x.left = y;
+        y.right = z;
+        updateHeight(y);
+        updateHeight(x);
+        return x;
+    }
+
+    private Node rotateRight(Node y) {
+        Node x = y.left;
+        Node z = x.left;
+        x.right = y;
+        y.left = z;
+        updateHeight(y);
+        updateHeight(x);
+        return x;
+    }
+
+    private Node rebalance(Node z) {
+        updateHeight(z);
+        int balance = getBalance(z);
+        if (balance > 1) {
+            if (height(z.right.right) > height(z.right.left)) {
+                z = rotateLeft(z);
+            } else {
+                z.right = rotateRight(z.right);
+                z = rotateLeft(z);
+            }
+        } else if (balance < -1) {
+            if (height(z.left.left) > height(z.left.right))
+                z = rotateRight(z);
+            else {
+                z.left = rotateLeft(z.left);
+                z = rotateRight(z);
+            }
+        }
+        return z;
     }
 
     private T findSmallestValue(Node node) {
@@ -66,12 +121,12 @@ public class BalancedBinarySearchTree<T extends Comparable<T>> {
                 return null;
             }
 
-            // Node has only left child
+            // Node has only right child
             if (current.left == null) {
                 return current.right;
             }
 
-            // Node has only right child
+            // Node has only left child
             if (current.right == null) {
                 return current.left;
             }
@@ -110,8 +165,6 @@ public class BalancedBinarySearchTree<T extends Comparable<T>> {
     boolean search(T item) {
         return recursiveSearch(root, item);
     }
-
-    int depthOf(T item) { throw new UnsupportedOperationException(); }
 
     private void printTree_preorder_recursive(Node node) {
         if(node == null) return;

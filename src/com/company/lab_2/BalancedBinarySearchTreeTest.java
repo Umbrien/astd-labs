@@ -62,8 +62,6 @@ class BalancedBinarySearchTreeTest {
 
         intTree.printTree_preorder();
         assertEquals("0 -4 2 200 \n", outContent.toString());
-
-        // TODO change test when balancing will be added
     }
 
     @Test
@@ -82,14 +80,6 @@ class BalancedBinarySearchTreeTest {
         assertFalse(tree.search(3));
         tree.addItem(3);
         assertTrue(tree.search(3));
-    }
-
-    @Test
-    void depthOf() {
-        BalancedBinarySearchTree<Integer> tree = new BalancedBinarySearchTree<>();
-        assertEquals(tree.depthOf(0), -1);
-        tree.addItem(0);
-        assertEquals(tree.depthOf(0), 0);
     }
 
     @Test
