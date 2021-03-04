@@ -15,7 +15,15 @@ public class BalancedBinarySearchTree<T extends Comparable<T>> {
 
     boolean isFull() {return !isEmpty();}
 
-    int size() { throw new UnsupportedOperationException(); }
+    int recursiveSize(Node current) {
+        if (current == null) return 0;
+
+        return 1 + recursiveSize(current.left) + recursiveSize(current.right);
+    }
+
+    int size() {
+        return recursiveSize(root);
+    }
 
     private Node recursiveAdd(Node current, T item) {
         if (current == null) {
