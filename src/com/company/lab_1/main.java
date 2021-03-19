@@ -89,7 +89,7 @@ class SortedLinkedList<T extends Comparable<T>> implements Iterable<T>{
         }
     }
 
-    public static <S extends Comparable<S>> SortedLinkedList<S> fromArray(S[] arr) {
+    public static <S extends Comparable<S>> SortedLinkedList<S> fromArray(S... arr) {
         SortedLinkedList<S> list = new SortedLinkedList<>();
 
         for (S i : arr) {
@@ -131,13 +131,13 @@ class Main {
 
     public static void main(String[] args) {
 
-        SortedLinkedList<Integer> list = SortedLinkedList.fromArray(new Integer[] {1, 6, 3, 1, 2, 5});
+        SortedLinkedList<Integer> list = SortedLinkedList.fromArray(1, 6, 3, 1, 2, 5);
         list.printList();
-        SortedLinkedList<String> stringList = SortedLinkedList.fromArray(new String[] {"a", "b", "bb", "aa", "ab"});
+        SortedLinkedList<String> stringList = SortedLinkedList.fromArray("a", "b", "bb", "aa", "ab");
         stringList.printList();
 
-        SortedLinkedList<Integer> l1 = SortedLinkedList.fromArray(new Integer[] {1, 2});
-        SortedLinkedList<Integer> l2 = SortedLinkedList.fromArray(new Integer[] {3, 4});
+        SortedLinkedList<Integer> l1 = SortedLinkedList.fromArray(1, 3);
+        SortedLinkedList<Integer> l2 = SortedLinkedList.fromArray(2, 4);
         l1.mergeList(l2);
         l1.printList();
     }

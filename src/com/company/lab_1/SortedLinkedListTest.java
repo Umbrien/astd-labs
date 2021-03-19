@@ -1,8 +1,26 @@
 package com.company.lab_1;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SortedLinkedListTest {
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+
+    @BeforeEach
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @AfterEach
+    public void restoreStreams() {
+        System.setOut(originalOut);
+    }
 
     @org.junit.jupiter.api.Test
     void isEmpty() {
@@ -30,7 +48,7 @@ class SortedLinkedListTest {
 
     @org.junit.jupiter.api.Test
     void makeEmpty() {
-        SortedLinkedList<Integer> list = SortedLinkedList.fromArray(new Integer[] {1, 2, 3});
+        SortedLinkedList<Integer> list = SortedLinkedList.fromArray(1, 2, 3);
         assertFalse(list.isEmpty());
         list.makeEmpty();
         assertTrue(list.isEmpty());
@@ -48,8 +66,8 @@ class SortedLinkedListTest {
 
     @org.junit.jupiter.api.Test
     void mergeList() {
-        SortedLinkedList<Integer> l1 = SortedLinkedList.fromArray(new Integer[] {1, 2});
-        SortedLinkedList<Integer> l2 = SortedLinkedList.fromArray(new Integer[] {3, 4});
+        SortedLinkedList<Integer> l1 = SortedLinkedList.fromArray(1, 3);
+        SortedLinkedList<Integer> l2 = SortedLinkedList.fromArray(2, 4);
         l1.mergeList(l2);
         assertEquals(l1.indexOf(1), 0);
         assertEquals(l1.indexOf(2), 1);
@@ -59,7 +77,7 @@ class SortedLinkedListTest {
 
     @org.junit.jupiter.api.Test
     void fromArray() {
-        SortedLinkedList<Integer> list = SortedLinkedList.fromArray(new Integer[] {1, 2, 3});
+        SortedLinkedList<Integer> list = SortedLinkedList.fromArray(1, 2, 3);
         assertEquals(list.indexOf(1), 0);
         assertEquals(list.indexOf(2), 1);
         assertEquals(list.indexOf(3), 2);
@@ -67,7 +85,7 @@ class SortedLinkedListTest {
 
     @org.junit.jupiter.api.Test
     void indexOf() {
-        SortedLinkedList<Integer> list = SortedLinkedList.fromArray(new Integer[] {1, 2, 3});
+        SortedLinkedList<Integer> list = SortedLinkedList.fromArray(1, 2, 3);
         assertEquals(list.indexOf(1), 0);
         assertEquals(list.indexOf(2), 1);
         assertEquals(list.indexOf(3), 2);
@@ -77,9 +95,16 @@ class SortedLinkedListTest {
 
     @org.junit.jupiter.api.Test
     void getSize() {
-        SortedLinkedList<Integer> list = SortedLinkedList.fromArray(new Integer[] {1, 2, 3});
+        SortedLinkedList<Integer> list = SortedLinkedList.fromArray(1, 2, 3);
         assertEquals(list.getSize(), 3);
         list.makeEmpty();
         assertEquals(list.getSize(), 0);
+    }
+
+    @org.junit.jupiter.api.Test
+    void printList() {
+        SortedLinkedList<Integer> list = SortedLinkedList.fromArray(1, 2, 3);
+        list.printList();
+        assertEquals("SortedLinkedList: 1 2 3 \n", outContent.toString());
     }
 }
