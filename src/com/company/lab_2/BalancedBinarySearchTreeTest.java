@@ -107,7 +107,17 @@ class BalancedBinarySearchTreeTest {
 
     @Test
     void insertBBST() {
-        BalancedBinarySearchTree.fromArray(1).insertBBST(BalancedBinarySearchTree.fromArray(2));
+        // https://www.tutorialcup.com/wp-content/uploads/2020/07/Merge-Two-Balanced-Binary-Search-Trees1.png
+        BalancedBinarySearchTree<Integer> t1 = BalancedBinarySearchTree.fromArray(7, 5, 8, 4, 6, 9);
+
+        // https://www.tutorialcup.com/wp-content/uploads/2020/07/Merge-Two-Balanced-Binary-Search-Trees2.png
+        BalancedBinarySearchTree<Integer> t2 = BalancedBinarySearchTree.fromArray(2, 1, 3);
+
+        t1.insertBBST(t2);
+
+        // https://www.tutorialcup.com/wp-content/uploads/2020/07/Merge-Two-Balanced-Binary-Search-Trees3.png
+        t1.printTree_preorder();
+        assertEquals("5 2 1 3 4 7 6 8 9 \n", outContent.toString());
     }
 
     @Test
@@ -116,7 +126,7 @@ class BalancedBinarySearchTreeTest {
         intTree.printTree_preorder();
         assertEquals("1 2 3 \n", outContent.toString());
 
-        BalancedBinarySearchTree<String> stringTree = BalancedBinarySearchTree.fromArray(new String[] {"a", "b", "c"});
+        BalancedBinarySearchTree<String> stringTree = BalancedBinarySearchTree.fromArray("a", "b", "c");
         stringTree.printTree_preorder();
         assertEquals("1 2 3 \na b c \n", outContent.toString());
 

@@ -1,6 +1,8 @@
 package com.company.lab_2;
 
 
+import java.util.ArrayList;
+
 public class BalancedBinarySearchTree<T extends Comparable<T>> {
     Node root;
 
@@ -87,19 +89,15 @@ public class BalancedBinarySearchTree<T extends Comparable<T>> {
         updateHeight(z);
         int balance = getBalance(z);
         if (balance > 1) {
-            if (height(z.right.right) > height(z.right.left)) {
-                z = rotateLeft(z);
-            } else {
+            if (height(z.right.right) <= height(z.right.left)) {
                 z.right = rotateRight(z.right);
-                z = rotateLeft(z);
             }
+            z = rotateLeft(z);
         } else if (balance < -1) {
-            if (height(z.left.left) > height(z.left.right))
-                z = rotateRight(z);
-            else {
+            if (height(z.left.left) < height(z.left.right)) {
                 z.left = rotateLeft(z.left);
-                z = rotateRight(z);
             }
+            z = rotateRight(z);
         }
         return z;
     }
@@ -205,7 +203,64 @@ public class BalancedBinarySearchTree<T extends Comparable<T>> {
         System.out.print("\n");
     }
 
-    void insertBBST(BalancedBinarySearchTree<T> tree) { throw new UnsupportedOperationException(); }
+    private void storeInOrder(Node root, ArrayList<T> arr) {
+        if (root != null) {
+            storeInOrder(root.left, arr);
+            arr.add(root.data);
+            storeInOrder(root.right, arr);
+        }
+    }
+
+    private ArrayList<T> mergeSortedArrays(ArrayList<T> arr1, ArrayList<T> arr2) {
+        int i = 0, j = 0;
+        ArrayList<T> arr = new ArrayList<>();
+
+        while (i < arr1.size() && j < arr2.size()) {
+            if (arr1.get(i).compareTo(arr2.get(j)) < 0) {
+                arr.add(arr1.get(i));
+                i++;
+            } else {
+                arr.add(arr2.get(j));
+                j++;
+            }
+        }
+
+        while (i < arr1.size()) {
+            arr.add(arr1.get(i));
+            i++;
+        }
+
+        while (j < arr2.size()) {
+            arr.add(arr2.get(j));
+            j++;
+        }
+
+        return arr;
+    }
+
+    private Node constructBSTFromSortedArray(ArrayList<T> arr, int start, int end) {
+        if (start > end) {
+            return null;
+        }
+
+        int mid = (start + end) / 2;
+        Node root = new Node(arr.get(mid));
+        root.left = constructBSTFromSortedArray(arr, start, mid - 1);
+        root.right = constructBSTFromSortedArray(arr, mid + 1, end);
+        return root;
+    }
+
+    void insertBBST(BalancedBinarySearchTree<T> tree) {
+        ArrayList<T> thisArr = new ArrayList<>();
+        storeInOrder(this.root, thisArr);
+
+        ArrayList<T> treeArr = new ArrayList<>();
+        storeInOrder(tree.root, treeArr);
+
+        ArrayList<T> mergedArr = mergeSortedArrays(thisArr, treeArr);
+
+        this.root = constructBSTFromSortedArray(mergedArr, 0, mergedArr.size() - 1);
+    }
 
     @SafeVarargs
     public static <S extends Comparable<S>> BalancedBinarySearchTree<S> fromArray(S... arr) {
