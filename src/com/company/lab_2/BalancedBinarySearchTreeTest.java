@@ -84,8 +84,6 @@ class BalancedBinarySearchTreeTest {
 
     @Test
     void printTree_preorder() {
-        // https://neerc.ifmo.ru/wiki/images/c/cf/Binary_search_tree.svg.png
-
         BalancedBinarySearchTree<Integer> tree = BalancedBinarySearchTree.fromArray(8, 3, 10, 1, 6, 14, 4, 7, 13);
         tree.printTree_preorder();
         assertEquals("8 3 1 6 4 7 10 14 13 \n", outContent.toString());
@@ -107,15 +105,12 @@ class BalancedBinarySearchTreeTest {
 
     @Test
     void insertBBST() {
-        // https://www.tutorialcup.com/wp-content/uploads/2020/07/Merge-Two-Balanced-Binary-Search-Trees1.png
         BalancedBinarySearchTree<Integer> t1 = BalancedBinarySearchTree.fromArray(7, 5, 8, 4, 6, 9);
 
-        // https://www.tutorialcup.com/wp-content/uploads/2020/07/Merge-Two-Balanced-Binary-Search-Trees2.png
         BalancedBinarySearchTree<Integer> t2 = BalancedBinarySearchTree.fromArray(2, 1, 3);
 
         t1.insertBBST(t2);
 
-        // https://www.tutorialcup.com/wp-content/uploads/2020/07/Merge-Two-Balanced-Binary-Search-Trees3.png
         t1.printTree_preorder();
         assertEquals("5 2 1 3 4 7 6 8 9 \n", outContent.toString());
     }
