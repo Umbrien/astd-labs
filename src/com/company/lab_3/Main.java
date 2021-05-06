@@ -8,5 +8,7 @@ public class Main {
         l.printList();
         l.append(1);
         l.printList();
+        l.heapSort();
+        l.printList();
     }
 }
