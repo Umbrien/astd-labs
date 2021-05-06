@@ -10,5 +10,13 @@ public class Main {
         l.printList();
         l.heapSort();
         l.printList();
+
+        PriorityQueue q = new PriorityQueue();
+        q.enqueue(3);
+        q.enqueue(1);
+        q.enqueue(2);
+        q.enqueue(6);
+        q.enqueue(4);
+        q.printQueue();
     }
 }
