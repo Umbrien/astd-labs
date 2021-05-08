@@ -5,8 +5,10 @@ public class Main {
         ArrayBasedList l = new ArrayBasedList();
         l.append(2);
         l.append(3);
-        l.printList();
         l.append(1);
+        l.append(5);
+        l.append(4);
+        l.append(6);
         l.printList();
         l.heapSort();
         l.printList();

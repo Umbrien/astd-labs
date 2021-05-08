@@ -1,6 +1,5 @@
 package com.company.lab_3;
 
-import java.util.ArrayList;
 
 public class PriorityQueue {
     private Node root;
