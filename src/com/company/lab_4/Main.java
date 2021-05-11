@@ -4,6 +4,7 @@ package com.company.lab_4;
 public class Main {
     public static void main(String[] args) {
         int vertices = 6;
+        int sourceVertex = 0;
         GraphWeighted graph = new GraphWeighted(vertices);
 
         graph.addEgde(0,3,5);
@@ -21,5 +22,6 @@ public class Main {
         graph.printGraph();
         System.out.println("MST");
         graph.kruskalMST();
+        graph.dijkstra_GetMinDistances(sourceVertex);
     }
 }
